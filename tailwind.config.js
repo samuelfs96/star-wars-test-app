@@ -16,6 +16,9 @@ export default {
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
       },
+      backgroundImage: {
+        'death-star': "url('./img/death_star.webp')",
+      }
     },
   },
   plugins: [
