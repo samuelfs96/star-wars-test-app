@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Card, HR, Pagination } from "flowbite-react";
+import { Card, HR } from "flowbite-react";
 import { useMemo } from "react";
 import { getPeople } from "../services/api";
 import { usePagination } from "../hooks/usePagination";
@@ -8,6 +8,7 @@ import ErrorPage from "./ErrorPage";
 import openModalIcon from "../img/icons/openmodal-icon.svg";
 import { useCharacterModal } from "../hooks/useCharacterModal";
 import CharacterDetails from "../components/CharacterDetails";
+import CustomPagination from "../components/CustomPagination";
 
 const Home = () => {
   const { handleOpenModal, openModal, handleCloseModal, character } =
@@ -17,6 +18,7 @@ const Home = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["people", currentPage],
     queryFn: () => getPeople(currentPage),
+    keepPreviousData: true,
   });
   const getTotalPages = useMemo(() => {
     if (!data) return 0;
@@ -27,12 +29,12 @@ const Home = () => {
 
   return (
     <>
-    <CharacterDetails
+      <CharacterDetails
         openModal={openModal}
         handleCloseModal={handleCloseModal}
         character={character}
       />
-      
+
       <div className="bg-black py-6 container mx-auto min-[1024px]:px-24 px-16">
         <span className="min-[1024px]:text-md text-sm font-medium uppercase">
           All characters
@@ -50,7 +52,10 @@ const Home = () => {
                   className="min-h-[240px] relative border-primary bg-death-star bg-fixed custom-star-box"
                 >
                   <div>
-                    <h2 onClick={() => handleOpenModal(character)} className="text-xl font-bold tracking-tight hover:cursor-pointer">
+                    <h2
+                      onClick={() => handleOpenModal(character)}
+                      className="text-xl font-bold tracking-tight hover:cursor-pointer"
+                    >
                       {character.name}
                     </h2>
                     <HR className="my-2" />
@@ -78,18 +83,7 @@ const Home = () => {
                 </Card>
               ))}
         </div>
-        <div className="custom-pagination">
-          <hr className="mt-8 mb-8" />
-          <div className="flex justify-center">
-            <Pagination
-              className="text-center"
-              currentPage={currentPage}
-              onPageChange={onPageChange}
-              showIcons={true}
-              totalPages={getTotalPages}
-            />
-          </div>
-        </div>
+        <CustomPagination {...{isLoading, currentPage, onPageChange, getTotalPages}}/>
       </div>
     </>
   );
