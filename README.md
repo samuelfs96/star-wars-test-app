@@ -9,6 +9,7 @@ This is a technical test to evaluate knowledge.
 - [About App](#about-app)
   - [Built with](#built-with)
   - [How to run](#how-to-run)
+  - [How to run test suite](#how-to-run-test-suite)
 - [Author](#author)
 
 ## Overview
@@ -52,6 +53,32 @@ This is a technical test to evaluate knowledge.
 * Open: 
 
 [http://localhost:5173/](http://localhost:5173/)
+
+### How to run test suite
+
+* Split a new terminal and run this while app is running:
+
+`npm run e2e`
+
+* Click on E2E Testing:
+
+![](./e2e_step1.png)
+
+* Choose a browser and click a green button:
+
+![](./e2e_step2.png)
+
+* Click on app.cy.js:
+
+![](./e2e_step3.png)
+
+* Finish, a test suite is running:
+
+![](./e2e_step4.png)
+
+* In cypress folder can see the tests:
+
+`cypress\e2e\app.cy.js`
 
 ## Author
 
