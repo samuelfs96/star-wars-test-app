@@ -1,0 +1,7 @@
+.custom-star-box > div{
+    backdrop-filter: brightness(0.2);
+}
+.custom-pagination > div > nav > ul{
+    flex-wrap: wrap;
+    justify-content: end;
+}
